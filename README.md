@@ -11,17 +11,16 @@ the visualization power of Kibana.
 
 Based on the [official Docker images][elastic-docker] from Elastic:
 
-* [Elasticsearch](https://github.com/elastic/elasticsearch/tree/main/distribution/docker)
-* [Logstash](https://github.com/elastic/logstash/tree/main/docker)
-* [Kibana](https://github.com/elastic/kibana/tree/main/src/dev/build/tasks/os_packages/docker_generator)
+- [Elasticsearch](https://github.com/elastic/elasticsearch/tree/main/distribution/docker)
+- [Logstash](https://github.com/elastic/logstash/tree/main/docker)
+- [Kibana](https://github.com/elastic/kibana/tree/main/src/dev/build/tasks/os_packages/docker_generator)
 
 Other available stack variants:
 
-* [`tls`](https://github.com/deviantony/docker-elk/tree/tls): TLS encryption enabled in Elasticsearch, Kibana (opt in),
+- [`tls`](https://github.com/deviantony/docker-elk/tree/tls): TLS encryption enabled in Elasticsearch, Kibana (opt in),
   and Fleet
 
-> [!IMPORTANT]
-> [Platinum][subscriptions] features are enabled by default for a [trial][license-mngmt] duration of **30 days**. After
+> [!IMPORTANT] > [Platinum][subscriptions] features are enabled by default for a [trial][license-mngmt] duration of **30 days**. After
 > this evaluation period, you will retain access to all the free features included in the Open Basic license seamlessly,
 > without manual intervention required, and without losing any data. Refer to the [How to disable paid
 > features](#how-to-disable-paid-features) section to opt out of this behaviour.
@@ -60,41 +59,41 @@ own_. [sherifabdlnaby/elastdocker][elastdocker] is one example among others of p
 ## Contents
 
 1. [Requirements](#requirements)
-   * [Host setup](#host-setup)
-   * [Docker Desktop](#docker-desktop)
-     * [Windows](#windows)
-     * [macOS](#macos)
+   - [Host setup](#host-setup)
+   - [Docker Desktop](#docker-desktop)
+     - [Windows](#windows)
+     - [macOS](#macos)
 1. [Usage](#usage)
-   * [Bringing up the stack](#bringing-up-the-stack)
-   * [Initial setup](#initial-setup)
-     * [Setting up user authentication](#setting-up-user-authentication)
-     * [Injecting data](#injecting-data)
-   * [Cleanup](#cleanup)
-   * [Version selection](#version-selection)
+   - [Bringing up the stack](#bringing-up-the-stack)
+   - [Initial setup](#initial-setup)
+     - [Setting up user authentication](#setting-up-user-authentication)
+     - [Injecting data](#injecting-data)
+   - [Cleanup](#cleanup)
+   - [Version selection](#version-selection)
 1. [Configuration](#configuration)
-   * [How to configure Elasticsearch](#how-to-configure-elasticsearch)
-   * [How to configure Kibana](#how-to-configure-kibana)
-   * [How to configure Logstash](#how-to-configure-logstash)
-   * [How to disable paid features](#how-to-disable-paid-features)
-   * [How to scale out the Elasticsearch cluster](#how-to-scale-out-the-elasticsearch-cluster)
-   * [How to re-execute the setup](#how-to-re-execute-the-setup)
-   * [How to reset a password programmatically](#how-to-reset-a-password-programmatically)
+   - [How to configure Elasticsearch](#how-to-configure-elasticsearch)
+   - [How to configure Kibana](#how-to-configure-kibana)
+   - [How to configure Logstash](#how-to-configure-logstash)
+   - [How to disable paid features](#how-to-disable-paid-features)
+   - [How to scale out the Elasticsearch cluster](#how-to-scale-out-the-elasticsearch-cluster)
+   - [How to re-execute the setup](#how-to-re-execute-the-setup)
+   - [How to reset a password programmatically](#how-to-reset-a-password-programmatically)
 1. [Extensibility](#extensibility)
-   * [How to add plugins](#how-to-add-plugins)
-   * [How to enable the provided extensions](#how-to-enable-the-provided-extensions)
+   - [How to add plugins](#how-to-add-plugins)
+   - [How to enable the provided extensions](#how-to-enable-the-provided-extensions)
 1. [JVM tuning](#jvm-tuning)
-   * [How to specify the amount of memory used by a service](#how-to-specify-the-amount-of-memory-used-by-a-service)
-   * [How to enable a remote JMX connection to a service](#how-to-enable-a-remote-jmx-connection-to-a-service)
+   - [How to specify the amount of memory used by a service](#how-to-specify-the-amount-of-memory-used-by-a-service)
+   - [How to enable a remote JMX connection to a service](#how-to-enable-a-remote-jmx-connection-to-a-service)
 1. [Going further](#going-further)
-   * [Plugins and integrations](#plugins-and-integrations)
+   - [Plugins and integrations](#plugins-and-integrations)
 
 ## Requirements
 
 ### Host setup
 
-* [Docker Engine][docker-install] version **18.06.0** or newer
-* [Docker Compose][compose-install] version **2.0.0** or newer
-* 1.5 GB of RAM
+- [Docker Engine][docker-install] version **18.06.0** or newer
+- [Docker Compose][compose-install] version **2.0.0** or newer
+- 1.5 GB of RAM
 
 > [!NOTE]
 > Especially on Linux, make sure your user has the [required permissions][linux-postinstall] to interact with the Docker
@@ -102,12 +101,12 @@ own_. [sherifabdlnaby/elastdocker][elastdocker] is one example among others of p
 
 By default, the stack exposes the following ports:
 
-* 5044: Logstash Beats input
-* 50000: Logstash TCP input
-* 9600: Logstash monitoring API
-* 9200: Elasticsearch HTTP
-* 9300: Elasticsearch TCP transport
-* 5601: Kibana
+- 5001: Logstash Beats input
+- 50000: Logstash TCP input
+- 9600: Logstash monitoring API
+- 9200: Elasticsearch HTTP
+- 9300: Elasticsearch TCP transport
+- 5601: Kibana
 
 > [!WARNING]
 > Elasticsearch's [bootstrap checks][bootstrap-checks] were purposely disabled to facilitate the setup of the Elastic
@@ -159,8 +158,8 @@ docker compose up
 Give Kibana about a minute to initialize, then access the Kibana web UI by opening <http://localhost:5601> in a web
 browser and use the following (default) credentials to log in:
 
-* user: *elastic*
-* password: *changeme*
+- user: _elastic_
+- password: _changeme_
 
 > [!NOTE]
 > Upon the initial startup, the `elastic`, `logstash_internal` and `kibana_system` Elasticsearch users are initialized
@@ -184,49 +183,49 @@ reset the passwords of all aforementioned Elasticsearch users to random secrets.
 
 1. Reset passwords for default users
 
-    The commands below reset the passwords of the `elastic`, `logstash_internal` and `kibana_system` users. Take note
-    of them.
+   The commands below reset the passwords of the `elastic`, `logstash_internal` and `kibana_system` users. Take note
+   of them.
 
-    ```sh
-    docker compose exec elasticsearch bin/elasticsearch-reset-password --batch --user elastic
-    ```
+   ```sh
+   docker compose exec elasticsearch bin/elasticsearch-reset-password --batch --user elastic
+   ```
 
-    ```sh
-    docker compose exec elasticsearch bin/elasticsearch-reset-password --batch --user logstash_internal
-    ```
+   ```sh
+   docker compose exec elasticsearch bin/elasticsearch-reset-password --batch --user logstash_internal
+   ```
 
-    ```sh
-    docker compose exec elasticsearch bin/elasticsearch-reset-password --batch --user kibana_system
-    ```
+   ```sh
+   docker compose exec elasticsearch bin/elasticsearch-reset-password --batch --user kibana_system
+   ```
 
-    If the need for it arises (e.g. if you want to [collect monitoring information][ls-monitoring] through Beats and
-    other components), feel free to repeat this operation at any time for the rest of the [built-in
-    users][builtin-users].
+   If the need for it arises (e.g. if you want to [collect monitoring information][ls-monitoring] through Beats and
+   other components), feel free to repeat this operation at any time for the rest of the [built-in
+   users][builtin-users].
 
 1. Replace usernames and passwords in configuration files
 
-    Replace the password of the `elastic` user inside the `.env` file with the password generated in the previous step.
-    Its value isn't used by any core component, but [extensions](#how-to-enable-the-provided-extensions) use it to
-    connect to Elasticsearch.
+   Replace the password of the `elastic` user inside the `.env` file with the password generated in the previous step.
+   Its value isn't used by any core component, but [extensions](#how-to-enable-the-provided-extensions) use it to
+   connect to Elasticsearch.
 
-    > [!NOTE]
-    > In case you don't plan on using any of the provided [extensions](#how-to-enable-the-provided-extensions), or
-    > prefer to create your own roles and users to authenticate these services, it is safe to remove the
-    > `ELASTIC_PASSWORD` entry from the `.env` file altogether after the stack has been initialized.
+   > [!NOTE]
+   > In case you don't plan on using any of the provided [extensions](#how-to-enable-the-provided-extensions), or
+   > prefer to create your own roles and users to authenticate these services, it is safe to remove the
+   > `ELASTIC_PASSWORD` entry from the `.env` file altogether after the stack has been initialized.
 
-    Replace the password of the `logstash_internal` user inside the `.env` file with the password generated in the
-    previous step. Its value is referenced inside the Logstash pipeline file (`logstash/pipeline/logstash.conf`).
+   Replace the password of the `logstash_internal` user inside the `.env` file with the password generated in the
+   previous step. Its value is referenced inside the Logstash pipeline file (`logstash/pipeline/logstash.conf`).
 
-    Replace the password of the `kibana_system` user inside the `.env` file with the password generated in the previous
-    step. Its value is referenced inside the Kibana configuration file (`kibana/config/kibana.yml`).
+   Replace the password of the `kibana_system` user inside the `.env` file with the password generated in the previous
+   step. Its value is referenced inside the Kibana configuration file (`kibana/config/kibana.yml`).
 
-    See the [Configuration](#configuration) section below for more information about these configuration files.
+   See the [Configuration](#configuration) section below for more information about these configuration files.
 
 1. Restart Logstash and Kibana to re-connect to Elasticsearch using the new passwords
 
-    ```sh
-    docker compose up -d logstash kibana
-    ```
+   ```sh
+   docker compose up -d logstash kibana
+   ```
 
 > [!NOTE]
 > Learn more about the security of the Elastic stack at [Secure the Elastic Stack][sec-cluster].
@@ -236,8 +235,8 @@ reset the passwords of all aforementioned Elasticsearch users to random secrets.
 Launch the Kibana web UI by opening <http://localhost:5601> in a web browser, and use the following credentials to log
 in:
 
-* user: *elastic*
-* password: *\<your generated elastic password>*
+- user: _elastic_
+- password: _\<your generated elastic password>_
 
 Now that the stack is fully configured, you can go ahead and inject some log entries.
 
@@ -280,9 +279,9 @@ command.
 
 Older major versions are also supported on separate branches:
 
-* [`release-7.x`](https://github.com/deviantony/docker-elk/tree/release-7.x): 7.x series
-* [`release-6.x`](https://github.com/deviantony/docker-elk/tree/release-6.x): 6.x series (End-of-life)
-* [`release-5.x`](https://github.com/deviantony/docker-elk/tree/release-5.x): 5.x series (End-of-life)
+- [`release-7.x`](https://github.com/deviantony/docker-elk/tree/release-7.x): 7.x series
+- [`release-6.x`](https://github.com/deviantony/docker-elk/tree/release-6.x): 6.x series (End-of-life)
+- [`release-5.x`](https://github.com/deviantony/docker-elk/tree/release-5.x): 5.x series (End-of-life)
 
 ## Configuration
 
@@ -298,7 +297,6 @@ You can also specify the options you want to override by setting environment var
 
 ```yml
 elasticsearch:
-
   environment:
     network.host: _non_loopback_
     cluster.name: my-cluster
@@ -315,7 +313,6 @@ You can also specify the options you want to override by setting environment var
 
 ```yml
 kibana:
-
   environment:
     SERVER_NAME: kibana.example.org
 ```
@@ -331,7 +328,6 @@ You can also specify the options you want to override by setting environment var
 
 ```yml
 logstash:
-
   environment:
     LOG_LEVEL: debug
 ```
@@ -413,7 +409,7 @@ The startup scripts for Elasticsearch and Logstash can append extra JVM options 
 variable, allowing the user to adjust the amount of memory that can be used by each component:
 
 | Service       | Environment variable |
-|---------------|----------------------|
+| ------------- | -------------------- |
 | Elasticsearch | ES_JAVA_OPTS         |
 | Logstash      | LS_JAVA_OPTS         |
 
@@ -426,15 +422,14 @@ For example, to increase the maximum JVM Heap Size for Logstash:
 
 ```yml
 logstash:
-
   environment:
     LS_JAVA_OPTS: -Xms1g -Xmx1g
 ```
 
 When these options are not set:
 
-* Elasticsearch starts with a JVM Heap Size that is [determined automatically][es-heap].
-* Logstash starts with a fixed JVM Heap Size of 1 GB.
+- Elasticsearch starts with a JVM Heap Size that is [determined automatically][es-heap].
+- Logstash starts with a fixed JVM Heap Size of 1 GB.
 
 ### How to enable a remote JMX connection to a service
 
@@ -447,7 +442,6 @@ Docker host (replace **DOCKER_HOST_IP**):
 
 ```yml
 logstash:
-
   environment:
     LS_JAVA_OPTS: -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.port=18080 -Dcom.sun.management.jmxremote.rmi.port=18080 -Djava.rmi.server.hostname=DOCKER_HOST_IP -Dcom.sun.management.jmxremote.local.only=false
 ```
@@ -458,8 +452,8 @@ logstash:
 
 See the following Wiki pages:
 
-* [External applications](https://github.com/deviantony/docker-elk/wiki/External-applications)
-* [Popular integrations](https://github.com/deviantony/docker-elk/wiki/Popular-integrations)
+- [External applications](https://github.com/deviantony/docker-elk/wiki/External-applications)
+- [Popular integrations](https://github.com/deviantony/docker-elk/wiki/Popular-integrations)
 
 [elk-stack]: https://www.elastic.co/what-is/elk-stack
 [elastic-docker]: https://www.docker.elastic.co/
@@ -468,35 +462,26 @@ See the following Wiki pages:
 [license-settings]: https://www.elastic.co/guide/en/elasticsearch/reference/current/license-settings.html
 [license-mngmt]: https://www.elastic.co/guide/en/kibana/current/managing-licenses.html
 [license-apis]: https://www.elastic.co/guide/en/elasticsearch/reference/current/licensing-apis.html
-
 [elastdocker]: https://github.com/sherifabdlnaby/elastdocker
-
 [docker-install]: https://docs.docker.com/get-docker/
 [compose-install]: https://docs.docker.com/compose/install/
 [linux-postinstall]: https://docs.docker.com/engine/install/linux-postinstall/
-
 [bootstrap-checks]: https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
 [es-sys-config]: https://www.elastic.co/guide/en/elasticsearch/reference/current/system-config.html
 [es-heap]: https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html#heap-size-settings
-
 [win-filesharing]: https://docs.docker.com/desktop/settings/windows/#file-sharing
 [mac-filesharing]: https://docs.docker.com/desktop/settings/mac/#file-sharing
-
 [builtin-users]: https://www.elastic.co/guide/en/elasticsearch/reference/current/built-in-users.html
 [ls-monitoring]: https://www.elastic.co/guide/en/logstash/current/monitoring-with-metricbeat.html
 [sec-cluster]: https://www.elastic.co/guide/en/elasticsearch/reference/current/secure-cluster.html
-
 [connect-kibana]: https://www.elastic.co/guide/en/kibana/current/connect-to-elasticsearch.html
 [index-pattern]: https://www.elastic.co/guide/en/kibana/current/index-patterns.html
-
 [config-es]: ./elasticsearch/config/elasticsearch.yml
 [config-kbn]: ./kibana/config/kibana.yml
 [config-ls]: ./logstash/config/logstash.yml
-
 [es-docker]: https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
 [kbn-docker]: https://www.elastic.co/guide/en/kibana/current/docker.html
 [ls-docker]: https://www.elastic.co/guide/en/logstash/current/docker-config.html
-
 [upgrade]: https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-upgrade.html
 
 <!-- markdownlint-configure-file

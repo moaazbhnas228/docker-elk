@@ -1,5 +1,4 @@
 services:
-
   # The 'setup' service runs a one-off script which initializes users inside
   # Elasticsearch — such as 'logstash_internal' and 'kibana_system' — with the
   # values of the passwords defined in the '.env' file. It also creates the
@@ -14,6 +13,10 @@ services:
   # due to the non-default profile it belongs to. To run it, either provide the
   # '--profile=setup' CLI flag to Compose commands, or "up" the service by name
   # such as 'docker compose up setup'.
+
+  # Docker Compose Profiles:
+  # Services with 'profiles' won't start by default with 'docker compose up'.
+  # Use '--profile=setup' or 'docker compose up setup' to run this service.
   setup:
     profiles:
       - setup
@@ -74,7 +77,7 @@ services:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro,Z
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro,Z
     ports:
-      - 5044:5044
+      - 5001:5001
       - 50000:50000/tcp
       - 50000:50000/udp
       - 9600:9600
